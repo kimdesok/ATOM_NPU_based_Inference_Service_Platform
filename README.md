@@ -1,10 +1,10 @@
-# Inference Service Platform (Prototype) for Supporting Cancer Diagnosis 
+# Inference Service Platform (Prototype) for Supporting Cancer Diagnosis (Under construction)
 
-GPU ↔ NPU performance benchmarking and RESTful inference service for pathology AI
+Performance benchmarking of CNN and ViT-Mil and RESTful architecture inspired inference service
 
 ## Project Overview
 
-This project presents a prototype platform for pathology image–based cancer diagnosis support inference services, designed to:
+This project presents a prototype platform for pathology image–based cancer diagnosis inference services, designed to:
 * benchmark deep learning model inference performance across GPU and NPU
 * implement a RESTful client–server inference architecture
 * validate NPU-based production deployment feasibility
@@ -13,18 +13,20 @@ The system was developed as a pre-production research platform to explore the ar
 
 ## Objectives
 
-* Design and implement a production-oriented inference platform prototype
-* Compare GPU vs. NPU inference performance
-* Develop a REST API–based client–server web application
-* Support batch model compilation and deployment
-* Validate pathology AI service workflow
+* Design and implement the prototypea of a production-oriented inference platform 
+* Compare inference performance of CNN-MILs vs. ViT-MIL models
+* Develop a RESTful architecture inspired client–server web application
+* Support compilation of GPU models in batch and deployment as NPU models
+* Validate pathology AI service workflow (future work)
 
 ### System Architecture <br>
+### System Architecture <br>
 Client (Web / Streamlit) <br>
-                │<br>
-                │ REST API<br>
-                ▼<br>
-Inference Server (FastAPI)<br>
+<div align="left">           │ </div>
+<div align="left">           │    REST API   </div>
+<div align="left">           ▼</div> 
+<div align="left"> Inference Server (FastAPI)</div>
+
  ├── Model Loader<br>
  ├── Batch Compiler<br>
  ├── Runtime Selector (GPU / NPU)<br>
@@ -32,14 +34,14 @@ Inference Server (FastAPI)<br>
 
 ### Key Features
 
-* Client–server inference execution mode comparison
-* Batch model compilation for NPU deployment
+* Comparison of outputs from the inference model
+* Batch compilation of GPU models for NPU deployment
 * Hardware-aware runtime selection
 * Integrated performance measurement
 
 ### Hardware Environment
 * GPUs - NVIDIA T4, NVIDIA A100, NVIDIA H100
-(additional GPU depending on environment)
+(additional GPUs depending on environment)
 
 * NPU - Rebellions ATOM+
 
@@ -65,7 +67,6 @@ PatchCamelyon (lymph node metastasis classification)
 *Planned - CAMELYON17 (scheduled for acquisition in the second half of the year)
 
 ### Storage Constraint
-
 *Current storage: 2 TB
 Limitations: Cannot store more than two datasets simultaneously
 Each dataset requires: ~5 days for download and preprocessing
