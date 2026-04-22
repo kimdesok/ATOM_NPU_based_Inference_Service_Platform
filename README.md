@@ -1,11 +1,11 @@
 # Inference Service Platform (Prototype) for Supporting Cancer Diagnosis (Under construction)
 
-Performance benchmarking of CNN and ViT-Mil and RESTful architecture inspired inference service
+Performance benchmarking of CNN-MIL and ViT-MIL models on the RESTful architecture inspired inference service
 
 ## Project Overview
 
 This project presents a prototype platform for pathology image–based cancer diagnosis inference services, designed to:
-* benchmark deep learning model inference performance across GPU and NPU
+* benchmark the inference performance of deep learning models across GPUs and NPUs
 * implement a RESTful client–server inference architecture
 * validate NPU-based production deployment feasibility
 
@@ -19,7 +19,6 @@ The system was developed as a pre-production research platform to explore the ar
 * Support compilation of GPU models in batch and deployment as NPU models
 * Validate pathology AI service workflow (future work)
 
-### System Architecture <br>
 ### System Architecture <br>
 Client (Web / Streamlit) <br>
 <div align="left">           │ </div>
@@ -49,7 +48,7 @@ Client (Web / Streamlit) <br>
 ### MIL Model Development for WSI-Based Diagnosis
 Infrastructure Migration
 Internal A100 GPU support was discontinued.
-Training was migrated to Elice-provided A100 compute resources.
+Training was migrated to Elice Group-provided A100 compute resources.
 The new environment enabled:
 large-scale dataset acquisition
 preprocessing
