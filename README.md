@@ -1,22 +1,22 @@
-# Inference Service Platform (Prototype) for Supporting Cancer Diagnosis (Under construction)
+# Inference Service Platform (Prototype) for Assisting Cancer Diagnosis
 
 Performance benchmarking of CNN-MIL and ViT-MIL models on the RESTful architecture inspired inference service
 
 ## Project Overview
 
 This project presents a prototype platform for pathology image–based cancer diagnosis inference services, designed to:
-* benchmark the inference performance of deep learning models across GPUs and NPUs
 * implement a RESTful client–server inference architecture
-* validate NPU-based production deployment feasibility
+* benchmark the inference performance of deep learning models across GPUs and NPUs
+* validate the feasibility of a NPU-based production deployment 
 
-The system was developed as a pre-production research platform to explore the architecture and operational workflow of a real clinical AI inference service.
+The system has been designed and developed as a pre-production research platform to explore the architecture and operational workflow of a real clinical AI inference service.
 
 ## Objectives
 
 * Design and implement the prototypea of a production-oriented inference platform 
-* Compare inference performance of CNN-MILs vs. ViT-MIL models
 * Develop a RESTful architecture inspired client–server web application
 * Support compilation of GPU models in batch and deployment as NPU models
+* Compare performance of evaluating CNN-MILs vs. ViT-MIL models on WSI datasets
 * Validate pathology AI service workflow (future work)
 
 ### System Architecture <br>
@@ -42,7 +42,7 @@ Client (Web / Streamlit) <br>
 * GPUs - NVIDIA T4, NVIDIA A100, NVIDIA H100
 (additional GPUs depending on environment)
 
-* NPU - Rebellions ATOM+
+* NPU - Rebellions' ATOM PLUS
 
 ## Results
 ### MIL Model Development for WSI-Based Diagnosis
