@@ -63,7 +63,12 @@ PatchCamelyon (lymph node metastasis classification)
 
 *CAMELYON16 (WSI metastasis detection)
 
-*Planned - CAMELYON17 (scheduled for acquisition in the second half of the year)
+*Planned - CAMELYON17 (scheduled for acquisition in the second half of the year)<br>
+
+**Hugging Face Space app** available:<br>
+<a href="https://huggingface.co/spaces/kimdesok/camelyon17-hitl-dashboard#in-the-planning-stage">
+  <img src="images/HF-Space1.png" alt="Alt Text" width="300">
+</a>
 
 ### Storage Constraint
 *Current storage: 2 TB
