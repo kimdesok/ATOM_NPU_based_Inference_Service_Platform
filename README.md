@@ -1,23 +1,19 @@
-# Inference Service Platform (Prototype) for Assisting Cancer Diagnosis
-
-Performance benchmarking of CNN-MIL and ViT-MIL models on the RESTful architecture inspired inference service
+# Inference Service Platform for Cancer Diagnosis(Prototype)
 
 ## Project Overview
 
-This project presents a prototype platform for pathology image–based cancer diagnosis inference services, designed to:
-* implement a RESTful client–server inference architecture
-* benchmark the inference performance of deep learning models across GPUs and NPUs
-* validate the feasibility of a NPU-based production deployment 
+This page describes on-going experiments and implementation of components to build a prototype inference service platform for cancer diagnosis based on microscopic tissue images.   Currently the following tasks were planned and some of them were implemented:
+* a RESTful client–server inference architecture
+* benchmarking of the inference performance of deep learning models across GPUs and NPUs
+* validation of the feasibility of a NPU-based production deployment
+* Rough idea of `a pre-production research platform` to explore the architecture and operational workflow of a real clinical AI inference service.
 
-The system has been designed and developed as a pre-production research platform to explore the architecture and operational workflow of a real clinical AI inference service.
+🎯 **Specific Aims:**
 
-## Objectives
-
-* Design and implement the prototypea of a production-oriented inference platform 
-* Develop a RESTful architecture inspired client–server web application
-* Support compilation of GPU models in batch and deployment as NPU models
-* Compare performance of evaluating CNN-MILs vs. ViT-MIL models on WSI datasets
-* Validate pathology AI service workflow (future work)
+1. Design and implement a REST API–based client–server web application as a production-oriented inference platform prototype
+2. Benchmark GPU vs. NPU inference performance of CNN-MIL and ViT-MIL models
+3. Support batch model compilation and deployment
+4. Validate pathology AI service workflow (future work)
 
 ### System Architecture <br>
 Client (Web / Streamlit) <br>
@@ -33,8 +29,8 @@ Client (Web / Streamlit) <br>
 
 ### Key Features
 
-* Comparison of outputs from the inference model
-* Batch compilation of GPU models for NPU deployment
+* Client–server inference execution mode comparison 
+* One click batch compilation of GPU models for NPU deployment
 * Hardware-aware runtime selection
 * Integrated performance measurement
 
@@ -42,17 +38,24 @@ Client (Web / Streamlit) <br>
 * GPUs - NVIDIA T4, NVIDIA A100, NVIDIA H100
 (additional GPUs depending on environment)
 
-* NPU - Rebellions' ATOM PLUS
+* NPU - Rebellions ATOM PLUS
 
 ## Results
 ### MIL Model Development for WSI-Based Diagnosis
-Infrastructure Migration
-Internal A100 GPU support was discontinued.
-Training was migrated to Elice Group-provided A100 compute resources.
-The new environment enabled:
-large-scale dataset acquisition
-preprocessing
-transformer-based MIL model development
+
+**Hugging Face Space app** available:<br>
+<a href="https://huggingface.co/spaces/kimdesok/camelyon17-hitl-dashboard#in-the-planning-stage">
+  <img src="images/HF-Space1.png" alt="Alt Text" width="300">
+</a>
+
+* Migration from Tensorflow/Keras Framework to `Pytorch ecosystem` that will enable the NPU compatible compilation of vsion foundation models provided by Hugging Face
+* Preprocessed datasets need to be further processed or converted to Pytorch equivalents
+(ex. from TFRecord to `IterableDataset` by tfrecord-dataset or `WebDataset/LMDB` to store and stream large-scale datasets)
+* Internal A100 GPU support was discontinued and some model training was performed to Elice Group-provided A100 compute resources.
+* The new environment enabled:
+>- large-scale dataset acquisition
+>- preprocessing
+>- transformer-based MIL model development
 
 ### Dataset Acquisition & Processing
 All training datasets were converted into TFRecord format for high-throughput training.
@@ -65,10 +68,7 @@ PatchCamelyon (lymph node metastasis classification)
 
 *Planned - CAMELYON17 (scheduled for acquisition in the second half of the year)<br>
 
-**Hugging Face Space app** available:<br>
-<a href="https://huggingface.co/spaces/kimdesok/camelyon17-hitl-dashboard#in-the-planning-stage">
-  <img src="images/HF-Space1.png" alt="Alt Text" width="300">
-</a>
+
 
 ### Storage Constraint
 *Current storage: 2 TB
