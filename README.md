@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This page describes on-going experiments and implementation of components to build a prototype inference service platform for cancer diagnosis based on microscopic tissue images.   Currently the following tasks were planned and some of them were implemented:
-* a RESTful client–server inference architecture
-* benchmarking of the inference performance of deep learning models across GPUs and NPUs
+This page describes on-going experiments and their outcomes along with implementation of components to build an inference service platform for cancer diagnosis based on microscopic tissue images.   Currently the following tasks are planned and some of them have been implemented:
+* design and implementation of a RESTful client–server inference architecture
+* benchmarking of the performance of deep learning models
 * validation of the feasibility of a NPU-based production deployment
-* Rough idea of `a pre-production research platform` to explore the architecture and operational workflow of a real clinical AI inference service.
+* requirement analysis of `a pre-production research platform` to explore the architecture and operational workflow of a real clinical AI inference service.
 
 🎯 **Specific Aims:**
 
@@ -27,6 +27,7 @@ Client (Web / Streamlit) <br>
  ├── Runtime Selector (GPU / NPU)<br>
  └── Performance Profiler<br>
 
+## Current Progress
 ### Key Features
 
 * Comparison between client vs. server inference execution as a part of validation and verification (no data but they were exactly same)
