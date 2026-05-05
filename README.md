@@ -36,7 +36,6 @@ Client (Web / Streamlit) <br>
 <img width="607" height="400" alt="image" src="https://github.com/user-attachments/assets/3b67d9ce-6ce6-4537-b3a6-3244891e3982" /><br>
 Figure 1 클라이언트 앱 기능 시연: GPU(.keras 포맷)로 학습된 모델을 NPU(.rbln) 포맷으로 배치 컴파일하는 기능 시연<br>
 
-
 * Hardware-aware runtime selection
 * Integrated performance measurement
 
@@ -46,7 +45,6 @@ Figure 2 클라이언트 앱 기능 시연: 실험 모델의 영상분류 성능
 ### Hardware Environment
 * GPUs - NVIDIA T4, NVIDIA A100, NVIDIA H100
 (additional GPUs depending on environment)
-
 * NPU - Rebellions ATOM PLUS
 
 ## Results
@@ -67,73 +65,76 @@ Figure 2 클라이언트 앱 기능 시연: 실험 모델의 영상분류 성능
 >- transformer-based MIL model development
 
 ### Dataset Acquisition & Processing
-All training datasets were converted into TFRecord format for high-throughput training.
-Secured Datasets
-*TCGA-BRCA (breast cancer histopathology)
+**Secured Datasets**
+* TCGA-BRCA (WSI, breast cancer histopathology, converted into TFRecord format for high-throughput training
+* PatchCamelyon (patches curated from breast cancer lymph node metastasis WSIs available as Hugging Face dataset)
+* CAMELYON16 (WSI, breast cancer lymph node metastasis, converted into TFRecord format)
+* CAMELYON17 (Planned, scheduled for acquisition in the second half of the year)<br>
 
-PatchCamelyon (lymph node metastasis classification)
-
-*CAMELYON16 (WSI metastasis detection)
-
-*Planned - CAMELYON17 (scheduled for acquisition in the second half of the year)<br>
+**Training status**
+- TCGA-BRCA	: MIL training completed
+- PatchCamelyon	: completed
+- CAMELYON16	: completed
+- CAMELYON17	: Planned acquisition but completed with CAMELYON17-WILDS dataset (curated patches)
 
 ### Storage Constraint
-*Current storage: 2 TB
-Limitations: Cannot store more than two datasets simultaneously
-Each dataset requires: ~5 days for download and preprocessing
+* Current storage: 2 TB
+* Limitations: Cannot store more than two datasets simultaneously <br>
+* Each dataset requires: ~5 days for download and preprocessing  <br>
 
 ➡️ Required for full pipeline operation: ≥ 5 TB storage
 
 This is a critical requirement for:
-*multi-dataset training
-*cross-domain generalization experiments
+* multi-dataset training
+* cross-domain generalization experiments
 
 ### Model Development
 1️⃣ ViT-Based MIL (ViT-MIL)
-Vision Transformer backbone
-Designed for WSI bag-level classification
+* Vision Transformer backbone
+* Designed for WSI bag-level classification
 
 2️⃣ CNN-Based MIL
-For performance comparison: ResNet50, VGG19, Inception V3
+* For performance comparison: ResNet50, VGG19, Inception V3
+* All CNN backbones were successfully trained in MIL configuration.
 
-All CNN backbones were successfully trained in MIL configuration.
+📊 Performance <br>
+* TCGA-BRCA Test Set 
+>- CNN	— (OOM – 160GB memory limit) 
+>- CNN-MIL	≥ 0.934 
+>- ViT-MIL	≥ 0.970 
+>- CNN tile-based training failed due to GPU memory limitations (OOM at 160 GB), while MIL-based approaches enabled scalable WSI learning.
 
-🧪 Training Status
-Dataset	Status
-TCGA-BRCA	- MIL training completed
-CAMELYON16	-Dataset analysis in progress
-PatchCamelyon	- Scheduled for MIL training
-CAMELYON17	- Planned acquisition
-📊 Performance (TCGA-BRCA Test Set)
-Model Type	AUC
-CNN	— (OOM – 160GB memory limit)
-CNN-MIL	≥ 0.90
-ViT-MIL	≥ 0.95
-
-CNN tile-based training failed due to GPU memory limitations (OOM at 160 GB),
-while MIL-based approaches enabled scalable WSI learning.
-
-🔍 Key Technical Insight
-*MIL is not just a modeling choice — it is a scalability enabler
-*ViT-MIL shows clear performance advantage for WSI classification
-*Storage capacity is a core infrastructure requirement, not an operational detail
- 
-Table 1. Performance comparison between CNN-MIL vs. ViT-MIL <br>
-CNN을 backbone으로 한 MIL 모델과 ViT를 backbone으로 한 ViT-MIL과의 정확도 비교<br>
+Table 1. Performance comparison between CNN-MIL vs. ViT-MIL for TCGA-BRCA dataset<br>
 <img width="583" height="101" alt="image" src="https://github.com/user-attachments/assets/7097d5dd-8da6-437d-86d2-4d6af35646c8" />
 
-<img width="536" height="280" alt="image" src="https://github.com/user-attachments/assets/e570cca0-d245-46c0-ba1b-d2605e84d81b" /><br>
-Visualization of pixel level regional annotations as a part of EDA experiment (Micromestasis marking in green) <br>
-EDA 실험의 일부로서 픽셀 수준의 어노테이션 정보(녹색실선)의 영역(region)별 가시화<br>
+* Camelyon16 Test Set <br>
+>- CNN-MIL	≥ 0.937 
+>- ViT-MIL	≥ 0.989 
 
-<img width="321" height="412" alt="image" src="https://github.com/user-attachments/assets/09c12d3f-15fe-408b-8b15-b9e47cb72678" /><br>
-Visualization of pixel level cell type annotations as a part of EDA experiment (Marking of metastatic cancer in orange, tissue in green, and glass black ground in red) Each square represents a 224x224 patch image <br> EDA 실험의 일부로서 전체슬라이드영상에서 조직 영역(녹색 실선)과 유리 슬라이드 백그라운드 영역(적색 실선)으로 분할하고 전이암 조직 어노테이션 정보(오렌지색 실선)를 가시화. 사각형 타일은 224x224 패치영상을 나타냄.<br>
+Table 2. Performance comparison between CNN-MIL vs. ViT-MIL for Camelyon16 dataset<br>
+<img width="545" height="51" alt="Image" src="https://github.com/user-attachments/assets/b1810801-2b70-4c9e-80ef-70ac834d3a6a" />
 
-<img width="546" height="470" alt="image" src="https://github.com/user-attachments/assets/cd1730f7-7b5d-401c-a3f1-84a0bbc14367" /><br>
-The slide on the left(A) shows the cancer tissue made of about 1,000 patch images, whereas the slide on the right(B) shows a couple of patch images representing tiny micrometastasis. EDA experiment hints that classifying the slide B could be somewhat difficult not to mention training a ViT-MIL in a straightforward manner.  Thus, as an alternative to WSI classification models, ones based on classification of patch level images or semantic segmentation could be tried. <br> 좌측 슬라이드(A)에서는 암조직 영역이 약 1천여개의 패치 영상으로 이루어져 있지만, 우측 슬라이드(B)에서는 그 영역이 단지 2개의 패치 영상으로 이루어져 있음. EDA 실험의 일부로서 현재 학습 중인 ViT-MIL 모델 학습의 어려운 점과 추론 모델을 활용해서 B 슬라이드 영상을 암으로 분류하기는 매우 어려울 것이라고 예상할 수 있음.  그러므로, 전체슬라이드영상 분류 모델의 차선책으로 패치영상 분류 모델, Semantic Segmentation 모델 등 학습 실험이 수행되어야 함.<br>
+🔍 **Key Technical Insight**
+* ViT-MIL shows clear performance advantage for WSI classification(See Table 1 above).
+* MIL is a scalability enabler, not just a modeling choice.
+* Storage capacity is a core infrastructure requirement, not an operational detail.
+* Visualization of individual patch with its inference outcome show why the model behaves poorly on some patches.
 
-<img width="423" height="253" alt="image" src="https://github.com/user-attachments/assets/966b09e5-cf38-4277-8af6-a27673938bfe" /><br>
-EDA 실험의 일부로서 일정 크기(224x224)의 패치영상을 가시화. 전이암조직 영상이 캡쳐된 패치(적색 하일라이트)와 정상 림프조직 세포 패치영상의 형태학적 비교를 통해 패치수준의 영상분류 모델 학습이 가능하리라는 잠정적 결론의 근거 제공.<br>
+🧪 **Exploration & Planning**<br>
+- **To visualize a big picture of and enable an interaction with WSIs**<br>
+<img width="321" height="412" alt="image" src="https://github.com/user-attachments/assets/09c12d3f-15fe-408b-8b15-b9e47cb72678" />
+Fig. 3 Visualization of pixel level cell type annotations as a part of EDA experiment (Marking of metastatic cancer in orange, tissue in green, and glass black ground in red) Each square represents a 224x224 patch image <br><br>
+
+- **To introduce a morphology based feature embedding into the model training**<br>
+<img width="600" height="850" alt="Image" src="https://github.com/user-attachments/assets/7a44b5f5-f0e1-44a8-aa98-e80f028d1ff2" />
+Fig. 4 Heatmap for a false negative outcome shows a large background included in the patch(Upper panel:Before tissue masking). When the background is set to 255, the inference outcome changes but still remained as false negative(Lower panel:After tissue masking).  It might be caused by the background that gets attention due to the current design of self attention scheme in the ViT architecture. <br><br>
+
+<img width="643" height="307" alt="Image" src="https://github.com/user-attachments/assets/3e0601d2-3d03-4544-a55f-0e02e975ff8d" />
+Fig. 5 A new multihead self attention scheme for ViT backbone has been designed to include nuclear segmentation embedding to represent a morphology based information to force the attention to be given to the high resolution features of the cell nuclei.
+
+
+
+
 
 
 
