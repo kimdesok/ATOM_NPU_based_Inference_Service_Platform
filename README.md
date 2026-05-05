@@ -126,7 +126,7 @@ Table 2. Performance comparison between CNN-MIL vs. ViT-MIL for Camelyon16 datas
 Fig. 3 Visualization of pixel level cell type annotations as a part of EDA experiment (Marking of metastatic cancer in orange, tissue in green, and glass black ground in red) Each square represents a 224x224 patch image <br><br>
 
 - **To introduce a morphology based feature embedding into the model training**<br>
-<img width="600" height="850" alt="Image" src="https://github.com/user-attachments/assets/7a44b5f5-f0e1-44a8-aa98-e80f028d1ff2" />
+<img width="600" height="650" alt="Image" src="https://github.com/user-attachments/assets/7a44b5f5-f0e1-44a8-aa98-e80f028d1ff2" />
 Fig. 4 Heatmap for a false negative outcome shows a large background included in the patch(Upper panel:Before tissue masking). When the background is set to 255, the inference outcome changes but still remained as false negative(Lower panel:After tissue masking).  It might be caused by the background that gets attention due to the current design of self attention scheme in the ViT architecture. <br><br>
 
 <img width="643" height="307" alt="Image" src="https://github.com/user-attachments/assets/3e0601d2-3d03-4544-a55f-0e02e975ff8d" />
